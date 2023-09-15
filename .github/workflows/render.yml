@@ -1,0 +1,16 @@
+on:
+  - workflow_dispatch
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    name: Render PDF
+    env:
+      GOOGLE_API_KEY: ${{ secrets.google_api_key }}
+      SPREADSHEET_KEY: ${{ secrets.spreadsheet_key }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec ruby main.rb
