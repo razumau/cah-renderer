@@ -1,13 +1,13 @@
 on:
   - workflow_dispatch
-
+name: Render PDF
 jobs:
   render:
     runs-on: ubuntu-latest
     name: Render PDF
     env:
-      GOOGLE_API_KEY: ${{ secrets.google_api_key }}
-      SPREADSHEET_KEY: ${{ secrets.spreadsheet_key }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      SPREADSHEET_KEY: ${{ secrets.SPREADSHEET_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
