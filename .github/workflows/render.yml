@@ -13,4 +13,19 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - run: bundle exec ruby main.rb
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install -U pdfly
+
+      - name: Render HTML files
+        run: bundle exec ruby main.rb
+
+      - name: Print HTML files to PDF files
+        run: node print_to_pdf.js
+
+      - name: Concatenate all PDF files into one
+        run: pdfly cat rendered/*.pdf -o rendered/cards.pdf
