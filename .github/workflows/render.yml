@@ -26,9 +26,6 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -U pdfly
-      - name: Install GitHub CLI
-        run: sudo apt-get update && sudo apt-get install -y gh
-
 
       - name: Render HTML files
         run: bundle exec ruby main.rb
