@@ -27,13 +27,32 @@
 
 </body>
 <style>
+    @media print {
+        body, html {
+            height: 100%;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card-container {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 1cm;
+            gap: 0.5cm;
+        }
+
+        .logo {
+            text-align: center;
+        }
+    }
+
     body {
         font-family: 'Helvetica', sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
-        /*height: 180vh;*/
-        background-color: #f3f3f3;
+        background-color: white;
     }
 
     .card-container {
@@ -64,6 +83,9 @@
 
     .logo {
         margin-top: auto;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
     }
 </style>
 </html>
