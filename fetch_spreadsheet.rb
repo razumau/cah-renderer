@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "dotenv/load"
 require "google/apis/sheets_v4"
 require "googleauth"
@@ -20,4 +21,3 @@ def fetch_data(sheet_name, column)
   sheets.key = GOOGLE_API_KEY
   sheets.get_spreadsheet_values(SPREADSHEET_KEY, "#{sheet_name}!#{column}2:#{column}")
 end
-

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative "fetch_spreadsheet"
 
 prompts = fetch_prompts
