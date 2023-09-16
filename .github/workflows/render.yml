@@ -1,5 +1,10 @@
 on:
-  - workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (use v1.0.0 format; will increase patch version of the latest release if not specified)'
+        required: false
+
 name: Render PDF
 jobs:
   render:
@@ -37,5 +42,29 @@ jobs:
       - name: Authenticate with GitHub CLI
         run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
 
+      - name: Determine next release version
+        id: next_version
+        run: |
+          # If version is provided through workflow_dispatch, use it
+          if [[ -n "${{ github.event.inputs.version }}" ]]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Fetch the latest release tag
+          LATEST_VERSION=$(gh release list --limit 1 | awk '{print $1}')
+          
+          # Split the version into major, minor, and patch
+          IFS='.' read -ra VERSION_PARTS <<< "${LATEST_VERSION:1}"  # Remove the 'v' prefix
+          MAJOR=${VERSION_PARTS[0]}
+          MINOR=${VERSION_PARTS[1]}
+          PATCH=${VERSION_PARTS[2]}
+          
+          # Increment the patch version
+          NEW_PATCH=$((PATCH + 1))
+          NEW_VERSION="v$MAJOR.$MINOR.$NEW_PATCH"
+          
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
       - name: Create release and upload PDF
-        run: gh release create v0.0.1 rendered/cards.pdf -t "v0.0.1"
+        run: gh release create ${{ steps.next_version.outputs.version }} rendered/cards.pdf -t "${{ steps.next_version.outputs.version }}"
