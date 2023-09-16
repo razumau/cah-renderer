@@ -21,6 +21,9 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -U pdfly
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install -y gh
+
 
       - name: Render HTML files
         run: bundle exec ruby main.rb
@@ -30,3 +33,9 @@ jobs:
 
       - name: Concatenate all PDF files into one
         run: pdfly cat rendered/*.pdf -o rendered/cards.pdf
+
+      - name: Authenticate with GitHub CLI
+        run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Create release and upload PDF
+        run: gh release create v0.0.1 rendered/cards.pdf -t "v0.0.1"
