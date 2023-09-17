@@ -25,7 +25,7 @@ const path = require('path');
 
             const margins = { bottom: 20, top: 20, left: 20, right: 20 }
             const pdf_path = path.join(rendered_folder, file.replace("html", "pdf"))
-            await page.pdf({ path: pdf_path, format: 'A4', margin: margins });
+            await page.pdf({ path: pdf_path, format: 'A4', margin: margins, printBackground: true });
             console.log(`Saved ${pdf_path}`);
 
             await page.close();
