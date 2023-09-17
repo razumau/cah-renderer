@@ -3,6 +3,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Карты</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -28,11 +31,21 @@
 </body>
 <style>
     @media print {
+        @page {
+            size: 21cm 29.7cm; /* A4 */
+        }
+
         body, html {
             height: 100%;
             background-color: white;
+            min-width: 21cm;
             margin: 0;
             padding: 0;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.5cm;
+            line-height: 1.2rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .card-container {
@@ -48,11 +61,13 @@
     }
 
     body {
-        font-family: 'Helvetica', sans-serif;
+        font-family: 'Inter', sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: white;
+        font-style: normal;
+        font-weight: 600;
     }
 
     .card-container {
