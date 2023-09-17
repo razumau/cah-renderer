@@ -3,17 +3,16 @@
 require "dotenv/load"
 require "google/apis/sheets_v4"
 require "googleauth"
-require_relative "card"
 
 SPREADSHEET_KEY = ENV["SPREADSHEET_KEY"]
 GOOGLE_API_KEY = ENV["GOOGLE_API_KEY"]
 
 def fetch_prompts
-  fetch_data("prompts", "D").map { |text| Card[:prompt, text] }
+  fetch_data("prompts", "D")
 end
 
 def fetch_responses
-  fetch_data("responses", "D").map { |text| Card[:response, text] }
+  fetch_data("responses", "D")
 end
 
 def fetch_data(sheet_name, column)
