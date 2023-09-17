@@ -3,7 +3,7 @@
 require "erb"
 
 def render_prompts(prompts)
-  template = ERB.new(File.read("templates/prompt.html.erb"))
+  template = ERB.new(File.read("templates/white.html.erb"))
 
   prompts.each_slice(20).each_with_index do |batch_of_prompts, index|
     puts "Rendering batch ##{index + 1} to HTML"
