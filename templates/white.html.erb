@@ -10,10 +10,10 @@
 <body>
 
 <div class="card-container">
-  <% cards.each do |card_text| %>
+  <% cards.each do |card_text, card_font_size, card_line_height| %>
       <div class="card">
         <div class="card-content">
-          <p>
+          <p style="font-size: <%= card_font_size %>px; line-height: <%= card_line_height %>rem">
             <%= card_text %>
           </p>
           <div class="logo">
@@ -43,8 +43,6 @@
             padding: 0;
             font-style: normal;
             font-weight: 600;
-            font-size: 0.5cm;
-            line-height: 1.2rem;
             font-family: 'Inter', sans-serif;
         }
 
@@ -83,7 +81,6 @@
         aspect-ratio: 7/8;
         display: flex;
         justify-content: center;
-        align-items: center;
         position: relative;
     }
 
@@ -93,7 +90,7 @@
         align-items: center;
         justify-content: center;
         width: 80%;
-        height: 80%;
+        height: 90%;
     }
 
     .logo {
