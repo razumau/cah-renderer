@@ -1,0 +1,4 @@
+#! /bin/bash
+
+rm rendered/*
+bundle exec ruby main.rb && node print_to_pdf.js && pdfly cat rendered/*.pdf -o rendered/cards.pdf
